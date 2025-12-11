@@ -12,12 +12,11 @@ function App() {
     <>
       <BrowserRouter>
         <Layout>
-          
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/recipes" element={<RecipesPage />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/recipe" element={<RecipeDetailPage />} />
+            <Route path="/recipes/:id" element={<RecipeDetailPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>
