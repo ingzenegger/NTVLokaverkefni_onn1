@@ -1,0 +1,35 @@
+.recipe-card {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border: 1px solid white;
+  border-radius: 17px;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  color: black;
+  font-weight: bolder;
+  text-align: center;
+
+  position: relative;
+
+  cursor: pointer;
+  transition: all 0.5s;
+  user-select: none;
+}
+
+.recipe-card:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.recipe-card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.recipe-card-title {
+  color: white;
+}

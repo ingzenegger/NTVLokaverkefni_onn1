@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RecipeDetailPage from "./recipe";
+import Card from "../components/RecipeCard/recipeCard";
+import "./pages.style.css";
 
 //look up meals by first letter: www.themealdb.com/api/json/v1/1/search.php?f=a
 
@@ -32,20 +34,22 @@ export default function RecipesPage() {
   return (
     <div>
       <h1>All Recipes page</h1>
-      <p>hopefully see data in console.log</p>
+      {/* <p>hopefully see data in console.log</p> */}
       <button>Next letter</button>
-      {console.log(recipes[0])}
+      {/* {console.log(recipes[0])} */}
 
-      <ul>
+      <div className="recipe-list">
         {recipes.map((recipe) => (
-          <div>
-            <p key={recipe.idMeal}>{recipe.strMeal}</p>
-            <Link to={`/recipes/${recipe.idMeal}`}>
-              <img key={recipe.idMeal} src={recipe.strMealThumb} />
-            </Link>
-          </div>
+          <Card recipe={recipe} key={recipe.idMeal} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
+
+// <div>
+//   <p key={recipe.idMeal}>{recipe.strMeal}</p>
+//   <Link to={`/recipes/${recipe.idMeal}`}>
+//     <img key={recipe.idMeal} src={recipe.strMealThumb} />
+//   </Link>
+// </div>

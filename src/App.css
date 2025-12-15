@@ -6,7 +6,7 @@ text color #38190f
 dark background? #016764 - þyrfti aðra link liti*/
 
 #root {
-  max-width: 1280px;
+  max-width: 1920px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -25,7 +25,6 @@ dark background? #016764 - þyrfti aðra link liti*/
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-
 /* 
 @keyframes logo-spin {
   from {
@@ -41,8 +40,6 @@ dark background? #016764 - þyrfti aðra link liti*/
     animation: logo-spin infinite 20s linear;
   }
 } */
-
-
 
 /* GOOGLE FONTS */
 
