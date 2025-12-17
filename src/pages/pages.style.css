@@ -1,7 +1,141 @@
-.recipe-list {
+/* Recipes list page CSS */
+
+.recipes-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   justify-content: center;
   margin: 1rem 0 0;
+}
+
+/* Recipe detail page CSS */
+.recipe-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 0;
+}
+
+.recipe-title {
+  margin-bottom: 0;
+}
+
+.recipe-tags {
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  background: #ea7f13;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.recipe-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.recipe-detail ul {
+  padding: 0;
+}
+
+.recipe-detail-image {
+  flex: 1 1 300px;
+  border: 1px solid white;
+  border-radius: 17px;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 1rem auto;
+}
+
+.recipe-img-ingr-div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 0 1rem;
+  gap: 2rem;
+}
+
+.ingredients-div {
+  flex: 1 1 250px;
+  min-width: 200px;
+}
+
+.ingredients-div li {
+  list-style: none;
+  text-align: left;
+  line-height: 1.5;
+  margin-bottom: 0.8em;
+}
+
+.instructions-div {
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.instructions-div > * {
+  flex: 1 1 300px;
+}
+
+.method-list {
+  padding-left: 1.2rem;
+  list-style-position: outside;
+  text-align: left;
+}
+
+.method-step {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  display: block;
+}
+
+.method-step::first-letter {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #ea7f13;
+  margin-right: 2px;
+}
+
+.recipe-video {
+  border: 1px solid white;
+  border-radius: 17px;
+  overflow: hidden;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  flex: 1 1 400px;
+  align-self: flex-start;
+  position: sticky;
+  top: 20px;
+  min-height: 300px;
+  margin: 1rem;
+}
+
+.recipe-detail-background {
+  background-image: linear-gradient(
+    rgba(234, 127, 19, 0.1),
+    rgba(206, 67, 20, 0.15)
+  );
+  border-radius: 20px;
+}
+
+hr.solid {
+  border: none;
+  height: 1px;
+  background-color: #ea7f13;
+  color: #ea7f13;
 }

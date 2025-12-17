@@ -38,7 +38,7 @@ export default function RecipesPage() {
       <button>Next letter</button>
       {/* {console.log(recipes[0])} */}
 
-      <div className="recipe-list">
+      <div className="recipes-list">
         {recipes.map((recipe) => (
           <Card recipe={recipe} key={recipe.idMeal} />
         ))}

@@ -22,7 +22,7 @@
 }
 
 .recipe-card:hover {
-  border: 1px solid black;
+  border: 1px solid #38190f;
   transform: scale(1.05);
 }
 
