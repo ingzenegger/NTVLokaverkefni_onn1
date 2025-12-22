@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import RecipeDetailPage from "./recipe";
 import Card from "../components/RecipeCard/recipeCard";
 import "./pages.style.css";
+import Loading from "../components/Loading/loading";
 
 //look up meals by first letter: www.themealdb.com/api/json/v1/1/search.php?f=a
 
+//fetch all meals by letter and combine to one array
+
 export default function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
-  // const [letter, setLetter] = useState("a");
   const letters = "abcdefghijklmnopqrstuvwxyz".split("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,7 +27,6 @@ export default function RecipesPage() {
           if (data.meals === null) {
             continue;
           }
-
           allRecipes.push(...data.meals);
         }
       } catch {
@@ -37,44 +38,48 @@ export default function RecipesPage() {
     };
 
     fetchRecipes();
-    console.log(letters);
   }, []);
 
-  // const nextLetterIndex = () => {
-  //   const currentIndex = letters.indexOf(letter);
-  //   const nextIndex = currentIndex + 1;
-  //   currentIndex < letters.length ? setLetter(letters[nextIndex]) : null;
-  // };
+  // pagination:
+  const [currentPage, setCurrentPage] = useState(1);
+  const recipesPerPage = 12;
+  const lastIndex = currentPage * recipesPerPage;
+  const firstIndex = lastIndex - recipesPerPage;
+  const currentRecipes = recipes.slice(firstIndex, lastIndex);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
+  //Loading:
 
   if (isLoading) {
-    return (
-      // <!-- From Uiverse.io by vinodjangid07 -->
-      <div className="loader">
-        <div className="panWrapper">
-          <div className="pan">
-            <div className="food"></div>
-            <div className="panBase"></div>
-            <div className="panHandle"></div>
-          </div>
-          <div className="panShadow"></div>
-        </div>
-      </div>
-
-      // <div className="loading-screen">
-      //   <h2>Gathering all the recipes...</h2>
-      //   <div className="spinner"></div> {/* You can style this later! */}
-      // </div>
-    );
+    return <Loading />;
   }
 
   return (
-    <div>
-      <h1>All Recipes page</h1>
+    <div className="recipes-container">
+      <h1 className="recipes-title-header">...Browse all Recipes...</h1>
       {/* <button onClick={nextLetterIndex}>Next letter</button> <p>{letter}</p> */}
       <div className="recipes-list">
-        {recipes.map((recipe) => (
+        {currentRecipes.map((recipe) => (
           <Card recipe={recipe} key={recipe.idMeal} />
         ))}
+      </div>
+      <div className="pagination-controls">
+        <button
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span> Page {currentPage} </span>
+        <button
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+          disabled={lastIndex >= recipes.length}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
