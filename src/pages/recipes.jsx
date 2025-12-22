@@ -20,24 +20,37 @@ export default function RecipesPage() {
           `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
         );
         const data = await response.json();
-        setRecipes(data.meals);
+        if (data.meals === null) {
+          console.log(`No recipes for ${letter}, skipping...`);
+          if (letter !== "z") {
+            nextLetterIndex();
+          } else {
+            setLetter("a");
+          }
+        } else {
+          setRecipes(data.meals);
+        }
       } catch {
         setError("villa kom upp!");
       } finally {
         setIsLoading(false);
       }
     };
+
     fetchRecipes();
     console.log(letters);
   }, [letter]);
 
+  const nextLetterIndex = () => {
+    const currentIndex = letters.indexOf(letter);
+    const nextIndex = currentIndex + 1;
+    currentIndex < letters.length ? setLetter(letters[nextIndex]) : null;
+  };
+
   return (
     <div>
       <h1>All Recipes page</h1>
-      {/* <p>hopefully see data in console.log</p> */}
-      <button>Next letter</button>
-      {/* {console.log(recipes[0])} */}
-
+      <button onClick={nextLetterIndex}>Next letter</button> <p>{letter}</p>
       <div className="recipes-list">
         {recipes.map((recipe) => (
           <Card recipe={recipe} key={recipe.idMeal} />
@@ -46,10 +59,3 @@ export default function RecipesPage() {
     </div>
   );
 }
-
-// <div>
-//   <p key={recipe.idMeal}>{recipe.strMeal}</p>
-//   <Link to={`/recipes/${recipe.idMeal}`}>
-//     <img key={recipe.idMeal} src={recipe.strMealThumb} />
-//   </Link>
-// </div>
