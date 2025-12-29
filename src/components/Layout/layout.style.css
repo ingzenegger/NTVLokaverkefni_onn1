@@ -13,7 +13,7 @@ main {
 header,
 footer {
   width: 100%;
-  /* background-color: blueviolet; for better viewing while editing */
+  border-radius: 20px;
 }
 
 nav {
@@ -21,9 +21,19 @@ nav {
   gap: 16px;
   padding: 16px 24px;
 }
+header {
+  background-image: linear-gradient(
+    rgba(234, 127, 19, 0.1),
+    rgba(206, 67, 20, 0.15)
+  );
+}
 
 footer {
   margin-top: auto;
+  background-image: linear-gradient(
+    rgba(206, 67, 20, 0.15),
+    rgba(234, 127, 19, 0.1)
+  );
 }
 
 .logo-small {

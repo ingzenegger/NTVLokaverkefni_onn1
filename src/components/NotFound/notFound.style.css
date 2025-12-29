@@ -1,0 +1,28 @@
+.notfound-heading {
+  font-family: Nunito;
+  color: #38190f;
+  margin-top: 0;
+}
+
+.sad-bug-logo {
+  max-height: 150px;
+}
+
+.cookies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 25%));
+
+  gap: 2rem;
+  justify-content: center;
+  margin: 1rem 0 0;
+  align-items: center;
+}
+
+.cookies-container {
+  background-image: linear-gradient(
+    rgba(234, 127, 19, 0.1),
+    rgba(206, 67, 20, 0.15)
+  );
+  border-radius: 20px;
+  padding: 0.4rem 0 2rem 0;
+}

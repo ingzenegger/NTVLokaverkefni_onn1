@@ -13,7 +13,14 @@ export default function Layout({ children }) {
       </header>
       <main>{children}</main>
       <footer>
-        <p>Debug My Dinner - footer</p>
+        {/* <p>Debug My Dinner - footer</p> */}
+        <Link to="/">
+          <img
+            src="/logo-debugdinner.png"
+            alt="Debug My Dinner logo"
+            className="logo"
+          />
+        </Link>
       </footer>
     </div>
   );

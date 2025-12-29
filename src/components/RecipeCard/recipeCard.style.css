@@ -30,6 +30,11 @@
   transform: scale(0.95) rotateZ(1.7deg);
 }
 
-.recipe-card-title {
+.recipe-card-title-normal {
   color: white;
+}
+
+.recipe-card-title-small {
+  color: white;
+  font-size: 1em;
 }

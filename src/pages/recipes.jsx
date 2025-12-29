@@ -1,3 +1,5 @@
+// Todo next: fix size of very long recipe titles to make font slightly smaller.
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RecipeDetailPage from "./recipe";

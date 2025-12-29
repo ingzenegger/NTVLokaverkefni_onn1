@@ -15,7 +15,15 @@ export default function Card({ recipe }) {
           backgroundSize: "cover",
         }}
       >
-        <h2 className="recipe-card-title">{recipe.strMeal}</h2>
+        <h2
+          className={
+            recipe.strMeal.length > 35
+              ? "recipe-card-title-small"
+              : "recipe-card-title-normal"
+          }
+        >
+          {recipe.strMeal}
+        </h2>
       </Link>
     </div>
   );

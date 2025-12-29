@@ -2,6 +2,7 @@ import "./pages.style.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
+import NotFound from "../components/NotFound/notFound";
 
 export default function RecipeDetailPage() {
   const { id } = useParams();
@@ -29,7 +30,8 @@ export default function RecipeDetailPage() {
   }, [id]);
 
   if (!recipe) {
-    return <div>Ekki tókst að ná í uppskrift</div>;
+    return <NotFound />;
+    // <div>Ekki tókst að ná í uppskrift</div>;
   }
 
   const ingredients = Object.entries(recipe)
@@ -43,7 +45,12 @@ export default function RecipeDetailPage() {
   const instructionSteps = recipe.strInstructions
     ? recipe.strInstructions
         .split(/\r?\n/)
-        .map((step) => step.replace(/^Step \d+:?/i, "").trim())
+        .map((step) =>
+          step
+            .replace(/^Step \d+:?/i, "")
+            .replace(/▢/g, "")
+            .trim()
+        )
         .filter((step) => step.trim().length > 0)
     : [];
 
