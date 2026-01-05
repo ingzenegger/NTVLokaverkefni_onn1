@@ -12,6 +12,7 @@ export default function RecipeDetailPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
     const fetchData = async () => {
       try {
         const recipeResponse = await fetch(
@@ -59,13 +60,13 @@ export default function RecipeDetailPage() {
 
   return (
     <div className="recipe-detail">
-      <header className="recipe-header">
+      <div className="recipe-header">
         <h1 className="recipe-title">{recipe.strMeal}</h1>
         <div className="recipe-tags">
           <span className="tag">Category: {recipe.strCategory}</span>
           <span className="tag">Area: {recipe.strArea}</span>
         </div>
-      </header>
+      </div>
 
       <div className="recipe-img-ingr-div recipe-detail-background">
         <img

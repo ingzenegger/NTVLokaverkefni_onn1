@@ -1,3 +1,17 @@
+/*Homepage CSS*/
+
+.home-popular-ingredients {
+  display: flex;
+  justify-content: center;
+}
+
+.home-random-recipe-container {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  max-width: 250px;
+}
+
 /* Recipes list page CSS */
 
 .recipes-container {
