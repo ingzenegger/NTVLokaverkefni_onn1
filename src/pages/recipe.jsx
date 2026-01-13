@@ -1,6 +1,6 @@
 import "./pages.style.css";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import NotFound from "../components/NotFound/notFound";
 
@@ -63,8 +63,12 @@ export default function RecipeDetailPage() {
       <div className="recipe-header">
         <h1 className="recipe-title">{recipe.strMeal}</h1>
         <div className="recipe-tags">
-          <span className="tag">Category: {recipe.strCategory}</span>
-          <span className="tag">Area: {recipe.strArea}</span>
+          <Link to={`/recipes/category/${recipe.strCategory}`} className="tag">
+            <span className="tag">Category: {recipe.strCategory}</span>
+          </Link>
+          <Link to={`/recipes/area/${recipe.strArea}`} className="tag">
+            <span className="tag">Area: {recipe.strArea}</span>
+          </Link>
         </div>
       </div>
 

@@ -5,7 +5,7 @@ export default function Card({ recipe }) {
   return (
     <div>
       <Link
-        to={`/recipes/${recipe.idMeal}`}
+        to={`/recipe/${recipe.idMeal}`}
         // className="recipe-card-link"
         aria-label={`Open recipe ${recipe.strMeal}`}
         className="recipe-card"

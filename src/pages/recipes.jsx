@@ -1,30 +1,31 @@
-// Todo next: fix size of very long recipe titles to make font slightly smaller.
-
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import RecipeDetailPage from "./recipe";
 import Card from "../components/RecipeCard/recipeCard";
 import "./pages.style.css";
 import Loading from "../components/Loading/loading";
-
-//look up meals by first letter: www.themealdb.com/api/json/v1/1/search.php?f=a
-
-//fetch all meals by letter and combine to one array
+import NotFound from "../components/NotFound/notFound";
 
 export default function RecipesPage() {
+  const { category, area } = useParams();
   const [recipes, setRecipes] = useState([]);
   const letters = "abcdefghijklmnopqrstuvwxyz".split("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const URL = "https://www.themealdb.com/api/json/v1/1/";
 
+  console.log("category is:", category);
+  console.log("area is:", area);
+
+  //fetch all meals by letter and combine to one array
   useEffect(() => {
+    if (category || area) return;
     const fetchRecipes = async () => {
+      setIsLoading(true);
       let allRecipes = [];
       try {
         for (let i = 0; i < letters.length; i++) {
-          const response = await fetch(
-            `https://www.themealdb.com/api/json/v1/1/search.php?f=${letters[i]}`
-          );
+          const response = await fetch(`${URL}search.php?f=${letters[i]}`);
           const data = await response.json();
           if (data.meals === null) {
             continue;
@@ -40,7 +41,48 @@ export default function RecipesPage() {
     };
 
     fetchRecipes();
-  }, []);
+  }, [category, area]);
+
+  //fetch only one category with useparams
+  useEffect(() => {
+    if (category) {
+      const fetchCategoryRecipes = async () => {
+        setIsLoading(true);
+        setCurrentPage(1);
+        try {
+          const response = await fetch(`${URL}filter.php?c=${category}`);
+          const data = await response.json();
+          setRecipes(data.meals);
+        } catch {
+          console.error("villa");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchCategoryRecipes();
+      console.log("category", category);
+    }
+  }, [category]);
+
+  //fetch recipes by area with useparams
+  useEffect(() => {
+    if (area) {
+      const fetchAreaRecipes = async () => {
+        setIsLoading(true);
+        setCurrentPage(1);
+        try {
+          const response = await fetch(`${URL}filter.php?a=${area}`);
+          const data = await response.json();
+          setRecipes(data.meals);
+        } catch {
+          console.error("villa");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchAreaRecipes();
+    }
+  }, [area]);
 
   // pagination:
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,8 +103,14 @@ export default function RecipesPage() {
 
   return (
     <div className="recipes-container">
-      <h1 className="recipes-title-header">...Browse all Recipes...</h1>
-      {/* <button onClick={nextLetterIndex}>Next letter</button> <p>{letter}</p> */}
+      <h1 className="recipes-title-header">
+        {category
+          ? `...Browsing ${category} Recipes...`
+          : area
+          ? `...Browsing ${area} Cuisine`
+          : "...Browse all Recipes..."}
+      </h1>
+
       <div className="recipes-list">
         {currentRecipes.map((recipe) => (
           <Card recipe={recipe} key={recipe.idMeal} />

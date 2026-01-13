@@ -16,7 +16,9 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/recipes" element={<RecipesPage />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/recipes/:id" element={<RecipeDetailPage />} />
+            <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+            <Route path="/recipes/category/:category" element={<RecipesPage />} />
+            <Route path="/recipes/area/:area" element={<RecipesPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>

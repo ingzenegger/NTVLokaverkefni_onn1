@@ -1,21 +1,31 @@
 /*Homepage CSS*/
 
-.home-popular-ingredients {
+/*  ---- ON HOLD FOR NOW ---- .home-popular-ingredients {
   display: flex;
   justify-content: center;
-}
+} */
 
 .home-random-recipe-container {
   display: flex;
   flex-direction: column;
   justify-self: center;
   max-width: 250px;
+  background-color: aquamarine; /*temporary color for visual assistance*/
 }
+
+.home-search-container {
+  background-color: #ea7f13; /*temporary color for visual assistance*/
+}
+
 .home-categories-list {
   width: 100%;
   height: 300px;
   display: flex;
   overflow-x: auto;
+  background-color: wheat; /*temporary color for visual assistance*/
+}
+.home-categories-container {
+  background-color: wheat; /*temporary color for visual assistance*/
 }
 
 .home-areas-list {
@@ -89,6 +99,10 @@
   font-size: 0.8rem;
   font-weight: bold;
   text-transform: uppercase;
+  cursor: pointer;
+}
+.tag:hover {
+  transform: scale(1.05);
 }
 
 .recipe-detail {

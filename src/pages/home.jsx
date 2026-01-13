@@ -1,8 +1,9 @@
-//next todo: fetch and display available categories
+//next todo: fix search option
 
 import { useEffect, useState } from "react";
 import IngrdntCard from "../components/IngredientCard/ingredientCard";
 import Card from "../components/RecipeCard/recipeCard";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const [isHangry, setIsHangry] = useState(false);
@@ -111,19 +112,19 @@ export default function HomePage() {
             Search {searchString}
           </button>
 
-          {isSearching ? (
+          {isSearching && searchResults ? (
             <div className="home-results-list">
               {searchResults.map((recipe) => (
                 <Card recipe={recipe} key={recipe.idMeal} />
               ))}
             </div>
           ) : (
-            <p></p>
+            <p> {`Sorry! I could not find any recipes for ${searchString}`}</p>
           )}
         </div>
       </div>
 
-      <div className="home-popular-ingredients-container">
+      {/* ---ON HOLD FOR NOW--- <div className="home-popular-ingredients-container">
         <h3>Would you like to check out our most popular ingredients?</h3>
         <div className="home-popular-ingredients">
           <IngrdntCard ingredient={"chicken"} />
@@ -131,7 +132,7 @@ export default function HomePage() {
           <IngrdntCard ingredient={"beef"} />
           <IngrdntCard ingredient={"pork"} />
         </div>
-      </div>
+      </div> */}
 
       <div className="home-categories-container">
         <h3>...browse our categories?</h3>
@@ -149,7 +150,9 @@ export default function HomePage() {
         <h3>...or even browse by area?</h3>
         <div className="home-areas-list">
           {areas.map((area) => (
-            <p key={area.strArea}>{area.strArea}</p>
+            <IngrdntCard area={area} key={area.strArea}>
+              {area.strArea}
+            </IngrdntCard>
           ))}
         </div>
       </div>
