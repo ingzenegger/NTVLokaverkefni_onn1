@@ -3,6 +3,7 @@
 
 import { Link } from "react-router-dom";
 import RecipesPage from "../../pages/recipes";
+import "./ingredientCard.style.css";
 
 //usable with category?
 
@@ -27,7 +28,7 @@ export default function IngrdntCard({ ingredient, category, area }) {
           </Link>
         </div>
       ) : area ? (
-        <div>
+        <div className="area-card">
           <Link to={`/recipes/area/${area.strArea}`}>
             <p>{area.strArea}</p>
           </Link>

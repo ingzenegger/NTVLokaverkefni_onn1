@@ -20,7 +20,18 @@ nav {
   display: flex;
   gap: 16px;
   padding: 16px 24px;
+  width: 100%;
 }
+nav a {
+  align-self: center;
+}
+.nav-filters {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  margin-right: 3rem;
+}
+
 header {
   background-image: linear-gradient(
     rgba(234, 127, 19, 0.1),

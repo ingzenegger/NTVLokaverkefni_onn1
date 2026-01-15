@@ -1,0 +1,29 @@
+.filter-dropdown {
+  background-color: #fefef6;
+  color: #38190f;
+  font-size: inherit;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 80%;
+}
+.filter-dropdown:hover {
+  background-color: #ea7f13;
+  border-radius: 5px;
+}
+
+.filter-dropdown option {
+  border-radius: 5px;
+}
+
+.filter-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+}

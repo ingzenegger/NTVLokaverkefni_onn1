@@ -1,20 +1,53 @@
 /*Homepage CSS*/
 
-/*  ---- ON HOLD FOR NOW ---- .home-popular-ingredients {
+.featured-container {
   display: flex;
   justify-content: center;
-} */
+}
 
-.home-random-recipe-container {
+.featured {
+  min-width: 20%;
+  margin: 1em;
+  padding: 1em;
+  border: solid 1px #ea7f13;
+  border-radius: 20px;
+}
+
+.home-popular-ingredients {
+  /* will delete? */
+  display: flex;
+  justify-content: center;
+}
+
+/* .home-random-recipe {
   display: flex;
   flex-direction: column;
   justify-self: center;
-  max-width: 250px;
-  background-color: aquamarine; /*temporary color for visual assistance*/
-}
+} */
 
 .home-search-container {
-  background-color: #ea7f13; /*temporary color for visual assistance*/
+  background-image: linear-gradient(
+    rgba(234, 127, 19, 0.1),
+    rgba(206, 67, 20, 0.15)
+  );
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.home-search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.home-results-list {
+  display: grid;
+  gap: 1em;
+  margin: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-rows: 1fr;
 }
 
 .home-categories-list {
@@ -22,25 +55,23 @@
   height: 300px;
   display: flex;
   overflow-x: auto;
-  background-color: wheat; /*temporary color for visual assistance*/
 }
 .home-categories-container {
-  background-color: wheat; /*temporary color for visual assistance*/
+  border: solid 1px #ea7f13;
+  border-radius: 20px;
+  margin-top: 1em;
+  padding: 1em;
 }
 
 .home-areas-list {
   width: 100%;
-  height: 100px;
+  height: auto;
   display: flex;
   align-items: center;
   overflow-x: auto;
-  gap: 3em;
-}
+  gap: 2em;
 
-.home-results-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-template-rows: 1fr;
+  padding: 1em;
 }
 
 /* Recipes list page CSS */

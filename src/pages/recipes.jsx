@@ -14,9 +14,6 @@ export default function RecipesPage() {
   const [error, setError] = useState(null);
   const URL = "https://www.themealdb.com/api/json/v1/1/";
 
-  console.log("category is:", category);
-  console.log("area is:", area);
-
   //fetch all meals by letter and combine to one array
   useEffect(() => {
     if (category || area) return;

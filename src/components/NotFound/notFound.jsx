@@ -44,7 +44,7 @@ export default function NotFound() {
       </h2>
       <img src="/sad-debug.png" alt="sad bug" className="sad-bug-logo" />
       <div className="cookies-container">
-        <p>Could I interest you in some cookies instead?</p>
+        <p>Could I interest you in our cookies instead?</p>
         <div className="cookies">
           {allCookies.map((recipe) => (
             <Card recipe={recipe} key={recipe.idMeal} />

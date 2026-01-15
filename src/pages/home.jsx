@@ -6,38 +6,42 @@ import Card from "../components/RecipeCard/recipeCard";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
+  const [isLoading, setIsLoading] = useState(true);
+  const featured = [53331, 53014, 52772]; //handpicked recipes
+  const [featuredMeals, setFeaturedMeals] = useState([]);
   const [isHangry, setIsHangry] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
   const [randomRecipe, setRandomRecipe] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [areas, setAreas] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
   const [searchString, setSearchString] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [areas, setAreas] = useState([]);
   const URL = "https://www.themealdb.com/api/json/v1/1/";
 
-  //search form functions
-  function handleChange(e) {
-    setSearchString(e.target.value);
-  }
-
+  //FEATURED FETCH
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchFeatured = async () => {
+      let allFeatured = [];
       try {
-        const response = await fetch(`${URL}search.php?s=${searchString}`);
-        const data = await response.json();
-        setSearchResults(data.meals);
+        for (let i = 0; i < featured.length; i++) {
+          const response = await fetch(`${URL}lookup.php?i=${featured[i]}`);
+          const data = await response.json();
+          allFeatured.push(...data.meals);
+        }
       } catch {
         console.error("villa");
       } finally {
-        //setja loading í false
+        setIsLoading(false);
       }
+      setFeaturedMeals(allFeatured);
     };
-    fetchData();
-  }, [isSearching]);
+    fetchFeatured();
+  }, []);
 
-  //For the random recipe, user clicks a button, changing state of isHangry to true, triggering random recipe useEffect.
+  //RANDOM RECIPE FETCH, user clicks a button, changing state of isHangry to true, triggering random recipe useEffect.
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch(`${URL}random.php`);
         const data = await response.json();
@@ -45,14 +49,37 @@ export default function HomePage() {
       } catch {
         console.error("villa");
       } finally {
-        //setja loading í false
+        setIsLoading(false);
       }
     };
     fetchData();
     console.log(randomRecipe);
   }, [isHangry]);
 
-  //fetch categories
+  //SEARCH FORM FETCH AND FUNCTIONS
+  function handleChange(e) {
+    setSearchString(e.target.value);
+    setIsSearching(false);
+  }
+
+  useEffect(() => {
+    if (!isSearching) return;
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`${URL}search.php?s=${searchString}`);
+        const data = await response.json();
+        setSearchResults(data.meals || []);
+      } catch {
+        console.error("villa");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [isSearching]);
+
+  //CATEGORIES FETCH
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -62,13 +89,13 @@ export default function HomePage() {
       } catch {
         console.error("villa");
       } finally {
-        //setja loading í false
+        setIsLoading(false);
       }
     };
     fetchData();
   }, []);
 
-  //fetch awailble meal areas
+  //AREAS FETCH
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,7 +105,7 @@ export default function HomePage() {
       } catch {
         console.error("villa");
       } finally {
-        //setja loading í false
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -86,23 +113,51 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1>Debug My Dinner - Home</h1>
+      <h1>Debug My Dinner</h1>
 
-      <h2>What are you debugging for?</h2>
+      {/* <h2>What are you debugging for?</h2> */}
 
-      <div className="home-random-recipe-container">
-        <h3>Hangry?</h3>
-        {isHangry ? (
-          <Card recipe={randomRecipe} />
-        ) : (
-          <button onClick={() => setIsHangry(!isHangry)}>
-            "YES give me anything"
-          </button>
-        )}
-      </div>
+      {featuredMeals.length > 0 ? (
+        <div className="featured-container">
+          <div className="featured1 featured">
+            <h2>Featured 1</h2>
+            <p>Sunday breakfast with the family?</p>
+            <Card recipe={featuredMeals[0]} />
+          </div>
+          <div className="featured2 featured">
+            <h2>Featured 2</h2>
+            <p>Italian classic for friday night?</p>
+            <Card recipe={featuredMeals[1]} />
+          </div>
+          <div className="featured3 featured">
+            <h2>Featured 3</h2>
+            <p>Craving some chicken?</p>
+            <Card recipe={featuredMeals[2]} />
+          </div>
+
+          <div className="home-random-recipe featured">
+            <h2>Hangry?</h2>
+            {isHangry ? (
+              <>
+                <p>Try this one!</p>
+                <Card recipe={randomRecipe} />
+              </>
+            ) : (
+              <>
+                <button onClick={() => setIsHangry(!isHangry)}>
+                  "YES give me anything"
+                </button>
+                <p>Hit that button and we'll pick something at random!</p>
+              </>
+            )}
+          </div>
+        </div>
+      ) : (
+        <p>...loading</p>
+      )}
 
       <div className="home-search-container">
-        <h3>Search by recipe title</h3>
+        <h3>Search recipe title</h3>
         <div className="home-search-form">
           <label>
             Find meal by name:
@@ -111,20 +166,42 @@ export default function HomePage() {
           <button onClick={() => setIsSearching(!isSearching)}>
             Search {searchString}
           </button>
-
-          {isSearching && searchResults ? (
-            <div className="home-results-list">
-              {searchResults.map((recipe) => (
-                <Card recipe={recipe} key={recipe.idMeal} />
-              ))}
-            </div>
-          ) : (
-            <p> {`Sorry! I could not find any recipes for ${searchString}`}</p>
-          )}
         </div>
+
+        {isLoading ? (
+          <p>Searching...</p>
+        ) : (
+          <>
+            {searchResults.length > 0 ? (
+              <div className="home-results-list">
+                {searchResults.map((recipe) => (
+                  <Card recipe={recipe} key={recipe.idMeal} />
+                ))}
+              </div>
+            ) : searchString && isSearching ? (
+              <p>
+                {" "}
+                {`Sorry! I could not find any recipes for ${searchString}`}
+              </p>
+            ) : (
+              <p></p>
+            )}
+          </>
+        )}
+        {/* // {isSearching && searchString && searchResults.length > 0 ? (
+        //   <div className="home-results-list">
+        //     {searchResults.map((recipe) => (
+        //       <Card recipe={recipe} key={recipe.idMeal} />
+        //     ))}
+        //   </div>
+        // ) : !isSearching && searchResults.length === 0 && searchString ? (
+        //   <p> {`Sorry! I could not find any recipes for ${searchString}`}</p>
+        // ) : (
+        //   <p></p>
+        // )} */}
       </div>
 
-      {/* ---ON HOLD FOR NOW--- <div className="home-popular-ingredients-container">
+      {/* <div className="home-popular-ingredients-container">
         <h3>Would you like to check out our most popular ingredients?</h3>
         <div className="home-popular-ingredients">
           <IngrdntCard ingredient={"chicken"} />
@@ -135,7 +212,7 @@ export default function HomePage() {
       </div> */}
 
       <div className="home-categories-container">
-        <h3>...browse our categories?</h3>
+        <h3>Browse categories</h3>
         <div className="home-categories-list">
           {categories.map((category) => (
             <IngrdntCard category={category} key={category.idCategory}>
@@ -147,7 +224,7 @@ export default function HomePage() {
       </div>
 
       <div className="home-areas-container">
-        <h3>...or even browse by area?</h3>
+        <h3>Browse by area</h3>
         <div className="home-areas-list">
           {areas.map((area) => (
             <IngrdntCard area={area} key={area.strArea}>

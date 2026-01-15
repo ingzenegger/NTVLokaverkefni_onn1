@@ -1,0 +1,25 @@
+.area-card {
+  background: #ea7f13;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  min-width: 120px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.area-card:hover {
+  transform: scale(1.05);
+}
+.area-card a {
+  color: white;
+}
+
+.category-card img {
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.category-card img:hover {
+  transform: scale(1.05);
+}
