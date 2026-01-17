@@ -1,7 +1,7 @@
 .notfound-heading {
   font-family: Nunito;
   color: #38190f;
-  margin-top: 0;
+  margin-top: 1rem;
 }
 
 .sad-bug-logo {
@@ -25,4 +25,5 @@
   );
   border-radius: 20px;
   padding: 0.4rem 0 2rem 0;
+  margin-bottom: 1rem;
 }

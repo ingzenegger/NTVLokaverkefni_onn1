@@ -47,8 +47,12 @@ export default function Layout({ children }) {
       <header>
         <nav>
           <img src="/debug.png" alt="debug logo" className="logo-small" />
-          <Link to="/">Homepage</Link>
-          <Link to="/recipes">All recipes</Link>
+          <Link to="/" reloadDocument>
+            Homepage
+          </Link>
+          <Link to="/recipes" reloadDocument>
+            All recipes
+          </Link>
 
           <div className="nav-filters">
             <FilterDropdown

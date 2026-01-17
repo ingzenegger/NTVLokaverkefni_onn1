@@ -83,7 +83,8 @@ export default function RecipesPage() {
 
   // pagination:
   const [currentPage, setCurrentPage] = useState(1);
-  const recipesPerPage = 12;
+  const recipesPerPage = 24;
+  const pagesTotal = Math.ceil(recipes.length / recipesPerPage);
   const lastIndex = currentPage * recipesPerPage;
   const firstIndex = lastIndex - recipesPerPage;
   const currentRecipes = recipes.slice(firstIndex, lastIndex);
@@ -99,35 +100,48 @@ export default function RecipesPage() {
   }
 
   return (
-    <div className="recipes-container">
-      <h1 className="recipes-title-header">
-        {category
-          ? `...Browsing ${category} Recipes...`
-          : area
-          ? `...Browsing ${area} Cuisine`
-          : "...Browse all Recipes..."}
-      </h1>
+    <>
+      {recipes.length === 0 ? (
+        <NotFound />
+      ) : (
+        <div className="recipes-container">
+          <h1 className="recipes-title-header">
+            {category
+              ? `...Browsing ${category} Recipes...`
+              : area
+              ? `...Browsing ${area} Cuisine`
+              : "...Browse all Recipes..."}
+          </h1>
 
-      <div className="recipes-list">
-        {currentRecipes.map((recipe) => (
-          <Card recipe={recipe} key={recipe.idMeal} />
-        ))}
-      </div>
-      <div className="pagination-controls">
-        <button
-          onClick={() => setCurrentPage((prev) => prev - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span> Page {currentPage} </span>
-        <button
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-          disabled={lastIndex >= recipes.length}
-        >
-          Next
-        </button>
-      </div>
-    </div>
+          <div className="recipes-list">
+            {currentRecipes.map((recipe) => (
+              <Card recipe={recipe} key={recipe.idMeal} />
+            ))}
+          </div>
+
+          {recipes.length <= recipesPerPage ? (
+            <p></p>
+          ) : (
+            <div className="pagination-controls">
+              <button
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <span>
+                Page {currentPage} of {pagesTotal}
+              </span>
+              <button
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+                disabled={lastIndex >= recipes.length}
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </>
   );
 }

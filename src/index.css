@@ -57,3 +57,12 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+button:disabled {
+  visibility: hidden;
+  /* display: none; */
+  /* transform: none;
+  border: none;
+  color: #fefef6;
+  cursor: default; */
+}

@@ -3,21 +3,23 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import NotFound from "../components/NotFound/notFound";
+import Card from "../components/RecipeCard/recipeCard";
 
 export default function RecipeDetailPage() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [videoError, setVideoError] = useState(false);
-  // const [instructions, setInstructions] = useState(null);
+  const [categoryRecipes, setCategoryRecipes] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
+  const URL = "https://www.themealdb.com/api/json/v1/1/";
 
+  //Fetch the recipe specifed by URL (meal ID)
   useEffect(() => {
     window.scrollTo(0, 0);
 
     const fetchData = async () => {
       try {
-        const recipeResponse = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-        );
+        const recipeResponse = await fetch(`${URL}lookup.php?i=${id}`);
 
         const recipeData = await recipeResponse.json();
         setRecipe(recipeData.meals[0]);
@@ -30,11 +32,49 @@ export default function RecipeDetailPage() {
     fetchData();
   }, [id]);
 
+  //fetch "similar recipes" to suggest, fetching category and picking random recipes to suggest.
+  useEffect(() => {
+    if (!recipe) return;
+    const fetchCategoryRecipes = async () => {
+      try {
+        const response = await fetch(
+          `${URL}filter.php?c=${recipe.strCategory}`
+        );
+        const data = await response.json();
+        setCategoryRecipes(data.meals);
+      } catch {
+        console.error("villa");
+      } finally {
+        //setja loading í false
+      }
+    };
+    fetchCategoryRecipes();
+  }, [recipe]);
+
+  useEffect(() => {
+    if (!categoryRecipes) return;
+    const getRandomRecipes = () => {
+      let rand = [];
+      const filteredList = categoryRecipes.filter(
+        (item) => item.idMeal !== recipe.idMeal
+      );
+      while (rand.length < 4 && rand.length < filteredList.length) {
+        const randomIndex = Math.floor(Math.random() * filteredList.length);
+        const item = filteredList[randomIndex];
+        if (!rand.includes(item)) {
+          rand.push(item);
+        }
+      }
+      setSuggestions(rand);
+    };
+    getRandomRecipes();
+  }, [categoryRecipes]);
+
   if (!recipe) {
     return <NotFound />;
-    // <div>Ekki tókst að ná í uppskrift</div>;
   }
 
+  //deconstructing and cleaning data from API to display recipe properly
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => key.startsWith("strIngredient") && value)
     .map(([key, value]) => value);
@@ -55,8 +95,7 @@ export default function RecipeDetailPage() {
         .filter((step) => step.trim().length > 0)
     : [];
 
-  // const instructions = recipe.strInstructions;
-  // const instruction = instructions.split("\r\n");
+  console.log("suggestions:", suggestions);
 
   return (
     <div className="recipe-detail">
@@ -115,6 +154,19 @@ export default function RecipeDetailPage() {
             onError={() => setVideoError(true)}
           />
         )}
+      </div>
+
+      <div className="suggestions-container recipe-detail-background">
+        <div className="suggestions-header">
+          <h2>You might like these {recipe.strCategory} recipes as well...</h2>
+          <img src="/debug.png" alt="debug logo" className="logo-small" />
+        </div>
+        <div className="similar-recipes-suggestions">
+          {/* show 4 cards with random recipes from category */}
+          {suggestions.map((recipe) => (
+            <Card recipe={recipe} key={recipe.idMeal} />
+          ))}
+        </div>
       </div>
     </div>
   );

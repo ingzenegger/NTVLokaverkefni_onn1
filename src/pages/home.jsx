@@ -16,6 +16,9 @@ export default function HomePage() {
   const [searchResults, setSearchResults] = useState([]);
   const [categories, setCategories] = useState([]);
   const [areas, setAreas] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const cantReachApi =
+    "Oops, can't reach the kitchen, please try refreshing the page.";
   const URL = "https://www.themealdb.com/api/json/v1/1/";
 
   //FEATURED FETCH
@@ -29,7 +32,8 @@ export default function HomePage() {
           allFeatured.push(...data.meals);
         }
       } catch {
-        console.error("villa");
+        console.error("error: could not reach API");
+        setErrorMessage(cantReachApi);
       } finally {
         setIsLoading(false);
       }
@@ -47,7 +51,8 @@ export default function HomePage() {
         const data = await response.json();
         setRandomRecipe(data.meals[0]);
       } catch {
-        console.error("villa");
+        console.error("error: could not reach API");
+        setErrorMessage(cantReachApi);
       } finally {
         setIsLoading(false);
       }
@@ -71,7 +76,8 @@ export default function HomePage() {
         const data = await response.json();
         setSearchResults(data.meals || []);
       } catch {
-        console.error("villa");
+        console.error("error: could not reach API");
+        setErrorMessage(cantReachApi);
       } finally {
         setIsLoading(false);
       }
@@ -87,7 +93,8 @@ export default function HomePage() {
         const data = await response.json();
         setCategories(data.categories);
       } catch {
-        console.error("villa");
+        console.error("error: could not reach API");
+        setErrorMessage(cantReachApi);
       } finally {
         setIsLoading(false);
       }
@@ -103,7 +110,8 @@ export default function HomePage() {
         const data = await response.json();
         setAreas(data.meals);
       } catch {
-        console.error("villa");
+        console.error("error: could not reach API");
+        setErrorMessage(cantReachApi);
       } finally {
         setIsLoading(false);
       }
@@ -152,6 +160,8 @@ export default function HomePage() {
             )}
           </div>
         </div>
+      ) : errorMessage ? (
+        <p>{errorMessage}</p>
       ) : (
         <p>...loading</p>
       )}
@@ -188,17 +198,6 @@ export default function HomePage() {
             )}
           </>
         )}
-        {/* // {isSearching && searchString && searchResults.length > 0 ? (
-        //   <div className="home-results-list">
-        //     {searchResults.map((recipe) => (
-        //       <Card recipe={recipe} key={recipe.idMeal} />
-        //     ))}
-        //   </div>
-        // ) : !isSearching && searchResults.length === 0 && searchString ? (
-        //   <p> {`Sorry! I could not find any recipes for ${searchString}`}</p>
-        // ) : (
-        //   <p></p>
-        // )} */}
       </div>
 
       {/* <div className="home-popular-ingredients-container">
@@ -213,25 +212,33 @@ export default function HomePage() {
 
       <div className="home-categories-container">
         <h3>Browse categories</h3>
-        <div className="home-categories-list">
-          {categories.map((category) => (
-            <IngrdntCard category={category} key={category.idCategory}>
-              {category.strCategory}
-              <img src={category.strCategoryThumb} alt="" />
-            </IngrdntCard>
-          ))}
-        </div>
+        {errorMessage ? (
+          <p>{errorMessage}</p>
+        ) : (
+          <div className="home-categories-list">
+            {categories.map((category) => (
+              <IngrdntCard category={category} key={category.idCategory}>
+                {category.strCategory}
+                <img src={category.strCategoryThumb} alt="" />
+              </IngrdntCard>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="home-areas-container">
         <h3>Browse by area</h3>
-        <div className="home-areas-list">
-          {areas.map((area) => (
-            <IngrdntCard area={area} key={area.strArea}>
-              {area.strArea}
-            </IngrdntCard>
-          ))}
-        </div>
+        {errorMessage ? (
+          <p>{errorMessage}</p>
+        ) : (
+          <div className="home-areas-list">
+            {areas.map((area) => (
+              <IngrdntCard area={area} key={area.strArea}>
+                {area.strArea}
+              </IngrdntCard>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
