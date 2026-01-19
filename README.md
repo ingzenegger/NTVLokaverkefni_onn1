@@ -56,10 +56,18 @@ npm run dev
 
 ## Future improvements
 
--More suggestions for the user, such as providing a starter, main and dessert suggestion on the homepage
--Add filtering for ingredients
--Add dark mode
--Make slider on home page and filter dropdown in header more visually appealing
+- Filtering selection in header updating with the URL/user selections:
+  -- for example: User filters for Italian cuisine in header dropdown, picks a pasta recipe. Header filtering shows "Select catogory" and "Italian". In recipe detail page user clicks "category pasta" bringing them to "browsing pasta recipes" and thus updating dropdown selectors to "Pasta" and "select area"
+
+- Adjusting the API category list, either sorting alphabetically OR by seperating ingredient category (beef, pork, seafood, goat etc) and then types (dessert, starter, breakfast etc), and the diet preferences (Vegan, vegetarian).
+
+- More suggestions for the user, such as providing a starter, main and dessert suggestion on the homepage
+
+- Add filtering for ingredients
+
+- Add dark mode
+
+- Make slider on home page and filter dropdown in header more visually appealing with CSS
 
 ## Sources
 

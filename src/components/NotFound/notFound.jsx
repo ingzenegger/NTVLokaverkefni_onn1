@@ -30,9 +30,6 @@ export default function NotFound() {
     fetchCookies();
   }, []);
 
-  console.log(allCookies);
-  //Loading:
-
   if (isLoading) {
     return <Loading />;
   }
@@ -40,17 +37,21 @@ export default function NotFound() {
   return (
     <div>
       <h2 className="notfound-heading">
-        Sorry, I could not debug this dinner...
+        Sorry, could not debug this dinner...
       </h2>
       <img src="/sad-debug.png" alt="sad bug" className="sad-bug-logo" />
-      <div className="cookies-container">
-        <p>Could I interest you in our cookies instead?</p>
-        <div className="cookies">
-          {allCookies.map((recipe) => (
-            <Card recipe={recipe} key={recipe.idMeal} />
-          ))}
+      {allCookies === null ? (
+        <p>Please try reloading the page</p>
+      ) : (
+        <div className="cookies-container">
+          <p>Would you be interested in our cookies instead?</p>
+          <div className="cookies">
+            {allCookies.map((recipe) => (
+              <Card recipe={recipe} key={recipe.idMeal} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

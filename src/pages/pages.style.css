@@ -19,11 +19,11 @@
   border-radius: 20px;
 }
 
-.home-popular-ingredients {
-  /* will delete? */
+/* //not in use, but might want to add back in later.
+.home-popular-ingredients { 
   display: flex;
   justify-content: center;
-}
+} */
 
 .home-search-container {
   background-image: linear-gradient(
@@ -49,8 +49,6 @@
   margin: 1em;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-template-rows: 1fr;
-  /* justify-content: center;
-  max-width: 1200px; */
 }
 
 .home-categories-list {

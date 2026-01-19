@@ -109,7 +109,7 @@ export default function RecipesPage() {
             {category
               ? `...Browsing ${category} Recipes...`
               : area
-              ? `...Browsing ${area} Cuisine`
+              ? `...Browsing ${area} Cuisine...`
               : "...Browse all Recipes..."}
           </h1>
 

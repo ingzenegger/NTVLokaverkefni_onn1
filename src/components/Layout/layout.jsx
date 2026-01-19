@@ -4,22 +4,22 @@ import "./layout.style.css";
 import FilterDropdown from "../FilterDropdown/filterDropdown";
 
 export default function Layout({ children }) {
-  //same as in home.jsx - look into helper functions?
   const [categories, setCategories] = useState([]);
   const [areas, setAreas] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const URL = "https://www.themealdb.com/api/json/v1/1/";
 
-  //fetch categories - almost same as home.jsx fetch
+  //fetch categories
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`${URL}categories.php`);
         const data = await response.json();
-        setCategories(data.categories.map((item) => item.strCategory)); //map is different from home.jsx
+        setCategories(data.categories.map((item) => item.strCategory));
       } catch {
         console.error("villa");
       } finally {
-        //setja loading í false
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -30,17 +30,15 @@ export default function Layout({ children }) {
       try {
         const response = await fetch(`${URL}list.php?a=list`);
         const data = await response.json();
-        setAreas(data.meals.map((item) => item.strArea)); //map is different from home.jsx
+        setAreas(data.meals.map((item) => item.strArea));
       } catch {
         console.error("villa");
       } finally {
-        //setja loading í false
+        setIsLoading(false);
       }
     };
     fetchData();
   }, []);
-
-  // helper? end?
 
   return (
     <div className="layout">
@@ -66,8 +64,7 @@ export default function Layout({ children }) {
       </header>
       <main>{children}</main>
       <footer>
-        {/* <p>Debug My Dinner - footer</p> */}
-        <Link to="/">
+        <Link to="/" reloadDocument>
           <img
             src="/logo-debugdinner.png"
             alt="Debug My Dinner logo"

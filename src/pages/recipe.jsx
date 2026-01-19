@@ -8,6 +8,7 @@ import Card from "../components/RecipeCard/recipeCard";
 export default function RecipeDetailPage() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [videoError, setVideoError] = useState(false);
   const [categoryRecipes, setCategoryRecipes] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
@@ -26,13 +27,13 @@ export default function RecipeDetailPage() {
       } catch {
         console.error("villa");
       } finally {
-        ///setja loading í false
+        setIsLoading(false);
       }
     };
     fetchData();
   }, [id]);
 
-  //fetch "similar recipes" to suggest, fetching category and picking random recipes to suggest.
+  //fetch "similar recipes" to suggest: fetching category and picking random recipes excluding current recipe.
   useEffect(() => {
     if (!recipe) return;
     const fetchCategoryRecipes = async () => {
@@ -45,7 +46,7 @@ export default function RecipeDetailPage() {
       } catch {
         console.error("villa");
       } finally {
-        //setja loading í false
+        setIsLoading(false);
       }
     };
     fetchCategoryRecipes();

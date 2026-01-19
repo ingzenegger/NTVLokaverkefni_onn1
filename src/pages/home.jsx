@@ -1,5 +1,3 @@
-//next todo: fix search option
-
 import { useEffect, useState } from "react";
 import IngrdntCard from "../components/IngredientCard/ingredientCard";
 import Card from "../components/RecipeCard/recipeCard";
@@ -123,22 +121,22 @@ export default function HomePage() {
     <div>
       <h1>Debug My Dinner</h1>
 
-      {/* <h2>What are you debugging for?</h2> */}
+      {/* <h2>What are you debugging for?</h2> Subheading not necessary...revisit later? */}
 
       {featuredMeals.length > 0 ? (
         <div className="featured-container">
           <div className="featured1 featured">
-            <h2>Featured 1</h2>
+            <h2>Featured</h2>
             <p>Sunday breakfast with the family?</p>
             <Card recipe={featuredMeals[0]} />
           </div>
           <div className="featured2 featured">
-            <h2>Featured 2</h2>
+            <h2>Featured</h2>
             <p>Italian classic for friday night?</p>
             <Card recipe={featuredMeals[1]} />
           </div>
           <div className="featured3 featured">
-            <h2>Featured 3</h2>
+            <h2>Featured</h2>
             <p>Craving some chicken?</p>
             <Card recipe={featuredMeals[2]} />
           </div>
@@ -200,7 +198,7 @@ export default function HomePage() {
         )}
       </div>
 
-      {/* <div className="home-popular-ingredients-container">
+      {/* <div className="home-popular-ingredients-container"> -----SCRAPPED FOR NOW-----
         <h3>Would you like to check out our most popular ingredients?</h3>
         <div className="home-popular-ingredients">
           <IngrdntCard ingredient={"chicken"} />

@@ -6,7 +6,6 @@ export default function Card({ recipe }) {
     <div>
       <Link
         to={`/recipe/${recipe.idMeal}`}
-        // className="recipe-card-link"
         aria-label={`Open recipe ${recipe.strMeal}`}
         className="recipe-card"
         style={{

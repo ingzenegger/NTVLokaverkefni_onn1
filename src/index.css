@@ -5,7 +5,8 @@
 
   color: #38190f;
   background-color: #fefef6;
-  /* color: #fefef6;
+  /* ---if I try again to have dark mode later--- 
+  color: #fefef6;
   background-color: #016764; */
 
   font-synthesis: none;
@@ -25,9 +26,6 @@ a:hover {
 
 body {
   margin: 0;
-  /* display: flex; */
-  /* place-items: center; */
-  /* min-width: 320px; */
   min-height: 100vh;
 }
 
@@ -60,9 +58,10 @@ button:focus-visible {
 
 button:disabled {
   visibility: hidden;
-  /* display: none; */
+  /*---other solutions available:*/
+  /* display: none; ---don't like this one because it moves the rest to the side */
   /* transform: none;
   border: none;
   color: #fefef6;
-  cursor: default; */
+  cursor: default; ----and buttons that are there but don't do anything are annoying*/
 }

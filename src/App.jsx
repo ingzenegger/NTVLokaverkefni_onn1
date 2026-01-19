@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/Layout/layout";
@@ -17,7 +16,10 @@ function App() {
             <Route path="/recipes" element={<RecipesPage />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/recipe/:id" element={<RecipeDetailPage />} />
-            <Route path="/recipes/category/:category" element={<RecipesPage />} />
+            <Route
+              path="/recipes/category/:category"
+              element={<RecipesPage />}
+            />
             <Route path="/recipes/area/:area" element={<RecipesPage />} />
           </Routes>
         </Layout>

@@ -28,10 +28,6 @@ export default function FilterDropdown({ label, type, options }) {
             {opt}
           </option>
         ))}
-        {/* <option value="Categories">Categories</option>
-        <option value="Category:Beef">Beef</option>
-        <option value="Category:Chicken">Chicken</option>
-        <option value="Category:Vegetarian">Vegetarian</option> */}
       </select>
     </div>
   );
