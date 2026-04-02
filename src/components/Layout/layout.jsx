@@ -1,44 +1,13 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import "./layout.style.css";
 import FilterDropdown from "../FilterDropdown/filterDropdown";
+import { useFilters } from "../../context/FilterContext";
+import Loading from "../Loading/loading";
 
 export default function Layout({ children }) {
-  const [categories, setCategories] = useState([]);
-  const [areas, setAreas] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const URL = "https://www.themealdb.com/api/json/v1/1/";
+  const { categories, areas, isLoading } = useFilters();
 
-  //fetch categories
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${URL}categories.php`);
-        const data = await response.json();
-        setCategories(data.categories.map((item) => item.strCategory));
-      } catch {
-        console.error("villa");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-  //fetch awailble meal areas
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${URL}list.php?a=list`);
-        const data = await response.json();
-        setAreas(data.meals.map((item) => item.strArea));
-      } catch {
-        console.error("villa");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  if (isLoading) return <Loading />;
 
   return (
     <div className="layout">

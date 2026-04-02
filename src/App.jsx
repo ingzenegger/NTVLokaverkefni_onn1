@@ -5,26 +5,27 @@ import RecipesPage from "./pages/recipes";
 import NotFound from "./components/NotFound/notFound";
 import RecipeDetailPage from "./pages/recipe";
 import HomePage from "./pages/home";
+import { FilterProvider } from "./context/FilterContext";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
+      <FilterProvider>
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/recipes" element={<RecipesPage />} />
-            <Route path="*" element={<NotFound />} />
             <Route path="/recipe/:id" element={<RecipeDetailPage />} />
             <Route
               path="/recipes/category/:category"
               element={<RecipesPage />}
             />
             <Route path="/recipes/area/:area" element={<RecipesPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
-      </BrowserRouter>
-    </>
+      </FilterProvider>
+    </BrowserRouter>
   );
 }
 

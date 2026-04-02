@@ -17,18 +17,15 @@ export default function IngrdntCard({ ingredient, category, area }) {
         </div>
       ) : category ? (
         <div className="category-card">
-          <Link to={`/recipes/category/${category.strCategory}`}>
-            <img
-              src={category.strCategoryThumb}
-              alt={`${category.strCategory}`}
-            />
-            <p>{category.strCategory}</p>
+          <Link to={`/recipes/category/${category.name}`}>
+            <img src={category.thumb} alt={`${category.name}`} />
+            <p>{category.name}</p>
           </Link>
         </div>
       ) : area ? (
         <div className="area-card">
-          <Link to={`/recipes/area/${area.strArea}`}>
-            <p>{area.strArea}</p>
+          <Link to={`/recipes/area/${area.name}`}>
+            <p>{area.name}</p>
           </Link>
         </div>
       ) : (

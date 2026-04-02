@@ -1,44 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import IngrdntCard from "../components/IngredientCard/ingredientCard";
 import Card from "../components/RecipeCard/recipeCard";
 import { Link } from "react-router-dom";
+import { useMeals } from "../hooks/useMeals";
+import { useFilters } from "../context/FilterContext";
+import BrowseCategories from "../components/BrowseCategories/browseCategories";
+import BrowseAreas from "../components/BrowseAreas/browseAreas";
 
 export default function HomePage() {
+  const URL = "https://www.themealdb.com/api/json/v1/1/";
   const [isLoading, setIsLoading] = useState(true);
-  const featured = [53331, 53014, 52772]; //handpicked recipes
-  const [featuredMeals, setFeaturedMeals] = useState([]);
+
+  const featured = useMemo(() => {
+    return [53331, 53014, 52772];
+  }, []); //handpicked recipes - memoized for custom useMeals hook
+  const {
+    meals: featuredMeals,
+    loading: featuredLoading,
+    error: featuredError,
+  } = useMeals(`${URL}lookup.php?i=`, featured);
+
   const [isHangry, setIsHangry] = useState(false);
   const [randomRecipe, setRandomRecipe] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchString, setSearchString] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [areas, setAreas] = useState([]);
+
   const [errorMessage, setErrorMessage] = useState("");
   const cantReachApi =
     "Oops, can't reach the kitchen, please try refreshing the page.";
-  const URL = "https://www.themealdb.com/api/json/v1/1/";
-
-  //FEATURED FETCH
-  useEffect(() => {
-    const fetchFeatured = async () => {
-      let allFeatured = [];
-      try {
-        for (let i = 0; i < featured.length; i++) {
-          const response = await fetch(`${URL}lookup.php?i=${featured[i]}`);
-          const data = await response.json();
-          allFeatured.push(...data.meals);
-        }
-      } catch {
-        console.error("error: could not reach API");
-        setErrorMessage(cantReachApi);
-      } finally {
-        setIsLoading(false);
-      }
-      setFeaturedMeals(allFeatured);
-    };
-    fetchFeatured();
-  }, []);
 
   //RANDOM RECIPE FETCH, user clicks a button, changing state of isHangry to true, triggering random recipe useEffect.
   useEffect(() => {
@@ -82,40 +72,6 @@ export default function HomePage() {
     };
     fetchData();
   }, [isSearching]);
-
-  //CATEGORIES FETCH
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${URL}categories.php`);
-        const data = await response.json();
-        setCategories(data.categories);
-      } catch {
-        console.error("error: could not reach API");
-        setErrorMessage(cantReachApi);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  //AREAS FETCH
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${URL}list.php?a=list`);
-        const data = await response.json();
-        setAreas(data.meals);
-      } catch {
-        console.error("error: could not reach API");
-        setErrorMessage(cantReachApi);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
 
   return (
     <div>
@@ -198,46 +154,8 @@ export default function HomePage() {
         )}
       </div>
 
-      {/* <div className="home-popular-ingredients-container"> -----SCRAPPED FOR NOW-----
-        <h3>Would you like to check out our most popular ingredients?</h3>
-        <div className="home-popular-ingredients">
-          <IngrdntCard ingredient={"chicken"} />
-          <IngrdntCard ingredient={"salmon"} />
-          <IngrdntCard ingredient={"beef"} />
-          <IngrdntCard ingredient={"pork"} />
-        </div>
-      </div> */}
-
-      <div className="home-categories-container">
-        <h3>Browse categories</h3>
-        {errorMessage ? (
-          <p>{errorMessage}</p>
-        ) : (
-          <div className="home-categories-list">
-            {categories.map((category) => (
-              <IngrdntCard category={category} key={category.idCategory}>
-                {category.strCategory}
-                <img src={category.strCategoryThumb} alt="" />
-              </IngrdntCard>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className="home-areas-container">
-        <h3>Browse by area</h3>
-        {errorMessage ? (
-          <p>{errorMessage}</p>
-        ) : (
-          <div className="home-areas-list">
-            {areas.map((area) => (
-              <IngrdntCard area={area} key={area.strArea}>
-                {area.strArea}
-              </IngrdntCard>
-            ))}
-          </div>
-        )}
-      </div>
+      <BrowseCategories />
+      <BrowseAreas />
     </div>
   );
 }

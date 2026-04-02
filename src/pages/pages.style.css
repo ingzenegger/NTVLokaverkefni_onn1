@@ -51,29 +51,9 @@
   grid-template-rows: 1fr;
 }
 
-.home-categories-list {
-  width: 100%;
-  height: 300px;
-  display: flex;
-  overflow-x: auto;
-}
-.home-categories-container {
-  border: solid 1px #ea7f13;
-  border-radius: 20px;
-  margin-top: 1em;
-  padding: 1em;
-}
 
-.home-areas-list {
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  overflow-x: auto;
-  gap: 2em;
 
-  padding: 1em;
-}
+
 
 /* Recipes list page CSS */
 
