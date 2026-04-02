@@ -1,0 +1,10 @@
+.home-areas-list {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  gap: 2em;
+
+  padding: 1em;
+}
