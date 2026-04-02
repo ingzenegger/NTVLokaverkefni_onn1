@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "./filterDropdown.style.css";
 
+//TODO: get the filterdropdown to follow along with the browsing, either by going back to "select ..." after each click, or by copying the "currently browsing..."
+
 export default function FilterDropdown({ label, type, options }) {
   const navigate = useNavigate();
 

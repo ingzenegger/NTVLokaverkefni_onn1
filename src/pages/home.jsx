@@ -20,6 +20,10 @@ export default function HomePage() {
     error: featuredError,
   } = useMeals(`${URL}lookup.php?i=`, featured);
 
+  //TODO: move featured div to standalone component called browseFeatured and update the "hangry" to "fetch random recipe".
+
+  //TODO: move search div to standalone component and improve function, perhaps with a useSearch custom hook
+
   const [isHangry, setIsHangry] = useState(false);
   const [randomRecipe, setRandomRecipe] = useState([]);
   const [isSearching, setIsSearching] = useState(false);

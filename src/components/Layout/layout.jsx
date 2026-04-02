@@ -4,6 +4,7 @@ import FilterDropdown from "../FilterDropdown/filterDropdown";
 import { useFilters } from "../../context/FilterContext";
 import Loading from "../Loading/loading";
 
+
 export default function Layout({ children }) {
   const { categories, areas, isLoading } = useFilters();
 

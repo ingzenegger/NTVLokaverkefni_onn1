@@ -7,6 +7,7 @@ import RecipeDetailPage from "./pages/recipe";
 import HomePage from "./pages/home";
 import { FilterProvider } from "./context/FilterContext";
 
+
 function App() {
   return (
     <BrowserRouter>

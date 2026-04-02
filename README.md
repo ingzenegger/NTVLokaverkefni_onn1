@@ -69,6 +69,8 @@ npm run dev
 
 - Make slider on home page and filter dropdown in header more visually appealing with CSS
 
+- Add a feature to save favorites to local storage
+
 ## Sources
 
 - API: TheMealDB
