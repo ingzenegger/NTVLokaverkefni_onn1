@@ -1,80 +1,59 @@
-# Debug My Dinner - recipe website
+# 🐛 Debug My Dinner
 
-Debug My Dinner is a recipe website built with React and Vite.
-The data comes from [TheMealDB](https://www.themealdb.com/): an open, crowd-sourced database of recipes from around the world.
+A recipe website built with React and Vite, powered by
+[TheMealDB](https://www.themealdb.com/) — an open, crowd-sourced
+database of recipes from around the world.
 
-## Project requirements
+## What it does
 
-Debug My Dinner was created as Inga M Beck's final project for Programming, part1 (Forritun 1. hluti) at [NTV](https://ntv.is/namsflokkur/forritun/).
-The basic requirements for the project were to create a recipe website using React with the following items/components:
-
-1.  Home page
-2.  Page listing all recipes
-3.  Page providing recipe details
-4.  Functional filtering by category
-5.  404 page
-6.  1 elective requirement: A search functionality
-
-Some use cases were provided as well to consider details such as error handling.
-
-### Other features
-
-- Featured recipes
-- Random recipe generator for those times you are just not in the mood to choose
+- Browse and search thousands of recipes from around the world
+- Filter by category (cuisine, meal type, dietary preference)
+- View full recipe details including ingredients and instructions
+- **Featured recipes** on the home page
+- **Random recipe generator** — for when you can't decide what to make
 - Responsive design for mobile and desktop
+- Custom 404 page
+
+[▶ Watch demo](https://github.com/ingzenegger/NTVLokaverkefni_onn1/public/DebugMyDinner_scrRecording.mp4)
 
 ## Getting started
 
-To get a local copy up and running, follow these simple steps.
+Prerequisites: [Node.js](https://nodejs.org/) (npm is included)
 
-Prerequisites:
-
-- Node.js: Ensure you have Node.js installed.
-- npm. Usually comes with Node.js
-
-Installation & Setup:
-
-1. Clone the repo:
-
-```
-git clone https://github.com/your-username/your-project-name.git
-```
-
-2. Install dependencies
-
-```
+```bash
+git clone https://github.com/your-username/debug-my-dinner.git
+cd debug-my-dinner
 npm install
-```
-
-3. Start the development server:
-
-```
 npm run dev
 ```
 
-4. Open your browser: The site will be running at http://localhost:5173
+Then open http://localhost:5173 in your browser.
 
-## Future improvements
+## What I'd improve next
 
-- Filtering selection in header updating with the URL/user selections:
-  -- for example: User filters for Italian cuisine in header dropdown, picks a pasta recipe. Header filtering shows "Select catogory" and "Italian". In recipe detail page user clicks "category pasta" bringing them to "browsing pasta recipes" and thus updating dropdown selectors to "Pasta" and "select area"
+- **Smarter filter state** — currently the header dropdown resets when
+  navigating between pages. Ideally filter selections would persist in
+  the URL so users can navigate freely without losing their place
+- **Better category organisation** — the API mixes ingredients (beef,
+  seafood), meal types (dessert, starter) and dietary preferences
+  (vegan, vegetarian) into one flat list. I'd separate these into
+  logical groups
+- More homepage suggestions: a starter, main and dessert trio
+- Filter by ingredient
+- Save favourites to local storage
+- Dark mode
+- Visual polish on the home page slider and filter dropdown
 
-- Adjusting the API category list, either sorting alphabetically OR by seperating ingredient category (beef, pork, seafood, goat etc) and then types (dessert, starter, breakfast etc), and the diet preferences (Vegan, vegetarian).
+## Built with
 
-- More suggestions for the user, such as providing a starter, main and dessert suggestion on the homepage
+- React, Vite, JavaScript
+- [TheMealDB API](https://www.themealdb.com/)
 
-- Add filtering for ingredients
+## Credits
 
-- Add dark mode
-
-- Make slider on home page and filter dropdown in header more visually appealing with CSS
-
-- Add a feature to save favorites to local storage
-
-## Sources
-
-- API: TheMealDB
-
-- Branding: Title and Bug logo were created with the assitance of ChatGPT.
-
-- UI Components: Loader (pan flipping food) is by [vinodjangid07](https://uiverse.io/vinodjangid07/polite-rat-20) via [UIVerse](https://uiverse.io/), a library of Open-Source UI.
+- Project name and bug logo created with assistance from ChatGPT
+- Loading animation (pan flipping food) by
+  [vinodjangid07](https://uiverse.io/vinodjangid07/polite-rat-20)
+  via [UIVerse](https://uiverse.io/)
+- Final project for Programming Part 1 at
+  [NTV](https://ntv.is/namsflokkur/forritun/), Fall 2025
