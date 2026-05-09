@@ -4,6 +4,8 @@ A recipe website built with React and Vite, powered by
 [TheMealDB](https://www.themealdb.com/) — an open, crowd-sourced
 database of recipes from around the world.
 
+[![Debug My Dinner demo](public/debugMydinner.png)](https://youtu.be/lJX7wRRAwJ0)
+
 ## What it does
 
 - Browse and search thousands of recipes from around the world
@@ -13,10 +15,7 @@ database of recipes from around the world.
 - **Random recipe generator** — for when you can't decide what to make
 - Responsive design for mobile and desktop
 - Custom 404 page
-[![Debug My Dinner demo](public/debugMydinner.png)](https://youtu.be/lJX7wRRAwJ0)
 
-
-[▶ Watch demo](https://github.com/ingzenegger/NTVLokaverkefni_onn1/public/DebugMyDinner_scrRecording.mp4)
 
 ## Getting started
 
